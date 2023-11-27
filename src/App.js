@@ -4,12 +4,14 @@ import axios from 'axios';
 import React from 'react';
 
 const baseURL = "http://testapi.test/api/books";
+// const baseURL = "http://testapi.test/api/books/1";
+
 
 function App() {
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`${baseURL}/20`).then((response) => {
+    axios.get(baseURL).then((response) => {
       setPost(response.data)
     });
   }, []);
@@ -18,8 +20,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{post.name}</h1>
-    </div>
+    {post.map((post) => (
+      <div key={post.id}>
+        <h1>{post.name}</h1>
+      </div>
+    ))}
+
+    {/* <h1>{post.name}</h1> */}
+  </div>
   );
 }
 
